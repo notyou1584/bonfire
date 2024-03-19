@@ -16,18 +16,30 @@ class StrollBonfireScreen extends StatelessWidget {
           builder: (context, state) {
             return SingleChildScrollView(
               // Added here!
-              child: Column(
+              child: Stack(
+                // Use a Stack to overlay widgets
                 children: [
-                  // Add the image and time/location information
                   _buildImageSection(),
-                  // Add the question and options
-                  _buildQuestionSection(context, state),
-                  // Add the bottom bar
+                  _buildProfileAndQuestion(context, state),
                 ],
               ),
             );
           },
         ),
+      ),
+    );
+  }
+
+  Widget _buildProfileAndQuestion(
+      BuildContext context, StrollBonfireState state) {
+    return Container(
+      padding: EdgeInsets.all(16.0),
+      child: Column(
+        children: [
+          SizedBox(height: 250), // Adjust height as needed
+          _buildProfileWidget(),
+          _buildQuestionSection(context, state),
+        ],
       ),
     );
   }
@@ -72,23 +84,38 @@ class StrollBonfireScreen extends StatelessWidget {
     );
   }
 
+  Widget _buildProfileWidget() {
+    return Positioned(
+      top: 220, // Adjust top position for desired placement
+      child: Row(
+        children: [
+          CircleAvatar(
+            radius: 30.0,
+            backgroundImage: AssetImage('assets/images/angelina.jpg'),
+          ),
+          SizedBox(width: 16.0),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Angelina, 28',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              // Add more info if needed
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _buildQuestionSection(BuildContext context, StrollBonfireState state) {
     return Container(
       padding: EdgeInsets.all(16.0),
+    
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Row(
-            children: [
-              SizedBox(width: 8.0),
-              Text(
-                'Angelina,28',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
           SizedBox(height: 16.0),
           Text(
             'What is your favorite time of the day?',
@@ -154,6 +181,36 @@ class StrollBonfireScreen extends StatelessWidget {
                         .selectOption('The serenity past midnight');
                   },
                 ),
+              ),
+            ],
+          ),
+          SizedBox(height: 20), // Spacing
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start, // Place at the end
+            children: [
+              Column(
+                 crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Pick your option', // Text beside the microphone
+                      style: TextStyle(fontSize: 12)),
+                  Text(
+                      'See who has simillar mind.', // Text beside the microphone
+                      style: TextStyle(fontSize: 12)),
+                ],
+              ),
+              SizedBox(width: 10),
+              IconButton(
+                icon: Icon(Icons.mic_outlined),
+                onPressed: () {
+                  // Handle microphone tap
+                },
+              ),
+              SizedBox(width: 20.0),
+              IconButton(
+                icon: Icon(Icons.arrow_forward_outlined),
+                onPressed: () {
+                  // Handle microphone tap
+                },
               ),
             ],
           ),
