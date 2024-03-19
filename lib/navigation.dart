@@ -41,24 +41,28 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Center(
         child: _pages.elementAt(_selectedIndex),
       ),
-      bottomNavigationBar: NavigationBar(
-        onDestinationSelected: _onItemTapped,
-        selectedIndex: _selectedIndex,
-        destinations: const [
-          NavigationDestination(
-            icon: FaIcon(FontAwesomeIcons.heart,size:30),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+        selectedItemColor: const Color.fromRGBO(139, 136, 239, 1),
+        unselectedItemColor: Colors.grey,
+        onTap: _onItemTapped,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: FaIcon(FontAwesomeIcons.heart, size: 30),
             label: '',
           ),
-          NavigationDestination(
-            icon: FaIcon(FontAwesomeIcons.fire,size:30),
+          BottomNavigationBarItem(
+            icon: Badge(child: FaIcon(FontAwesomeIcons.fire, size: 30)),
             label: '',
           ),
-          NavigationDestination(
-            icon: FaIcon(FontAwesomeIcons.comment,size:30),
+          BottomNavigationBarItem(
+            icon: Badge(
+                label: Text('2'),
+                child: FaIcon(FontAwesomeIcons.comment, size: 30)),
             label: '',
           ),
-          NavigationDestination(
-            icon: Icon(Icons.person,size:30),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person, size: 30),
             label: '',
           ),
         ],

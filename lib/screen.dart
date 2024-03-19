@@ -55,41 +55,45 @@ class StrollBonfireScreen extends StatelessWidget {
         ),
       ),
       child: Center(
-        
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SizedBox(height:50),
-            Text(
-              'Stroll Bonfire',
-              style: TextStyle(
-                fontSize: 35.0,
-                fontWeight: FontWeight.bold,
-                color: Color.fromRGBO(200, 199, 235, 1), 
-                shadows: [
-                  Shadow(
-                    color: Colors.black.withOpacity(0.3), 
-                    offset: Offset(
-                        0, 2),
-                    blurRadius: 4,
+            SizedBox(height: 50),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Stroll Bonfire',
+                  style: TextStyle(
+                    fontSize: 35.0,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromRGBO(200, 199, 235, 1),
+                    shadows: [
+                      Shadow(
+                        color: Colors.black.withOpacity(0.3),
+                        offset: Offset(0, 2),
+                        blurRadius: 4,
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+                Icon(Icons.keyboard_arrow_down_rounded, color: Colors.white),
+              ],
             ),
-            SizedBox(height: 20.0),
+            SizedBox(height: 10.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(Icons.access_time, color: Colors.white),
-                 SizedBox(width: 2.0),
+                SizedBox(width: 2.0),
                 Text(
                   '${DateTime.now().hour}:${DateTime.now().minute}',
                   style: TextStyle(fontSize: 15.0, color: Colors.white),
                 ),
                 SizedBox(width: 10.0),
                 Icon(Icons.person, color: Colors.white),
-                 SizedBox(width: 2.0),
-                 Text(
+                SizedBox(width: 2.0),
+                Text(
                   '120',
                   style: TextStyle(fontSize: 15.0, color: Colors.white),
                 ),
@@ -103,9 +107,9 @@ class StrollBonfireScreen extends StatelessWidget {
 
   Widget _buildProfileWidget() {
     return Positioned(
-      top: 400, // Adjust top position for desired placement
+      top: 440, // Adjust top position for desired placement
       child: Container(
-        padding: EdgeInsets.all(8), // Padding for inner content
+        padding: EdgeInsets.zero, // Padding for inner content
         child: Row(
           children: [
             Container(
@@ -126,18 +130,21 @@ class StrollBonfireScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    decoration: BoxDecoration(
-                      color: Colors.black, // Background color
-                      borderRadius:
-                          BorderRadius.circular(10), // Rounded corners
-                    ),
                     padding: EdgeInsets.symmetric(
-                        horizontal: 8, vertical: 4), // Padding for text
+                        horizontal: 8, vertical: 2), // Padding for text
                     child: Text(
                       'Angelina, 28',
                       style: TextStyle(
                         fontSize: 15,
-                        color: Colors.white, // Text color
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        shadows: [
+                          Shadow(
+                            color: Colors.black.withOpacity(0.3),
+                            offset: Offset(0, 2),
+                            blurRadius: 4,
+                          ),
+                        ], // Text color
                       ),
                     ),
                   ),
@@ -152,17 +159,22 @@ class StrollBonfireScreen extends StatelessWidget {
   }
 
   Widget _buildQuestionSection(BuildContext context, StrollBonfireState state) {
+    String selectedOption = '';
+    if (state is StrollBonfireOptionSelected) {
+      selectedOption = state.selectedOption;
+    }
+
     return Container(
-      padding: EdgeInsets.all(10.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            '       What is your favorite time of the day?',
+            '        What is your favorite time of the day?',
             style: TextStyle(
-              fontSize: 22.0,
+              fontSize: 25.0,
               fontWeight: FontWeight.bold,
             ),
+            textAlign: TextAlign.center,
           ),
           SizedBox(height: 4.0),
           Text(
@@ -171,10 +183,9 @@ class StrollBonfireScreen extends StatelessWidget {
               color: Color.fromRGBO(174, 172, 234, 0.5),
               fontSize: 15.0,
               fontStyle: FontStyle.italic,
-              
             ),
           ),
-          SizedBox(height: 4.0),
+          SizedBox(height: 8.0),
           Row(
             children: [
               Expanded(
@@ -238,7 +249,7 @@ class StrollBonfireScreen extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 20), // Spacing
+          SizedBox(height: 20.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.start, // Place at the end
             children: [
@@ -248,22 +259,22 @@ class StrollBonfireScreen extends StatelessWidget {
                   Text('Pick your option', // Text beside the microphone
                       style: TextStyle(fontSize: 12)),
                   Text(
-                      'See who has simillar mind.', // Text beside the microphone
-                      style: TextStyle(fontSize: 12)),
+                    'See who has similar mind.', // Text beside the microphone
+                    style: TextStyle(fontSize: 12),
+                  ),
                 ],
               ),
-              SizedBox(width: 65.0),
+              SizedBox(width: 75.0),
               Container(
+                height: 50,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(
-                      color: Color.fromRGBO(139, 136, 239, 1),
-                      width: 2), // Circular border
+                      color: Color.fromRGBO(139, 136, 239, 1), width: 1),
                 ),
                 child: IconButton(
                   icon: Icon(Icons.mic_outlined,
-                      color: Color.fromRGBO(
-                          139, 136, 239, 1)), // Purple microphone icon
+                      color: Color.fromRGBO(139, 136, 239, 1), size: 35),
                   onPressed: () {
                     // Handle microphone tap
                   },
@@ -271,16 +282,15 @@ class StrollBonfireScreen extends StatelessWidget {
               ),
               SizedBox(width: 20.0),
               Container(
+                height: 50,
                 decoration: BoxDecoration(
                   color: Color.fromRGBO(139, 136, 239, 1),
                   shape: BoxShape.circle,
                   border: Border.all(
-                      color: Color.fromRGBO(139, 136, 239, 1),
-                      width: 2), // Circular border
+                      color: Color.fromRGBO(139, 136, 239, 1), width: 1),
                 ),
                 child: IconButton(
-                  icon: Icon(Icons.arrow_forward_outlined,
-                      color: Colors.black), // Purple arrow icon
+                  icon: Icon(Icons.arrow_forward_outlined, color: Colors.black),
                   onPressed: () {
                     // Handle arrow tap
                   },
@@ -326,53 +336,61 @@ class _OptionButtonState extends State<OptionButton> {
     }
     return GestureDetector(
       onTap: widget.onTap,
-      child: Container(
-        height: 60.0,
-        decoration: BoxDecoration(
-          color: Colors.grey[850],
-          border: Border.all(
-            width: widget.isSelected ? 2.0 : 1.0,
+      child: Material(
+        elevation: 4.0, // Set the desired elevation here
+        borderRadius: BorderRadius.circular(8.0),
+        child: Container(
+          height: 60.0,
+          decoration: BoxDecoration(
+            color: Colors.grey[850],
+            border: Border.all(
+              color: widget.isSelected
+                  ? const Color.fromRGBO(139, 136, 239, 1)
+                  : const Color.fromRGBO(139, 136, 239, 0),
+              width: widget.isSelected ? 2.0 : 1.0,
+            ),
+            borderRadius: BorderRadius.circular(8.0),
           ),
-          borderRadius: BorderRadius.circular(8.0),
-        ),
-        child: Row(
-          children: [
-            Container(
-              width: 30.0,
-              height: 30.0,
-              margin: EdgeInsets.all(8.0),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: widget.isSelected ? Colors.blue : Colors.grey,
-                  width: widget.isSelected ? 2.0 : 1.0,
+          child: Row(
+            children: [
+              Container(
+                width: 30.0,
+                height: 30.0,
+                margin: EdgeInsets.all(8.0),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: widget.isSelected
+                        ? const Color.fromRGBO(139, 136, 239, 1)
+                        : Colors.grey,
+                    width: widget.isSelected ? 2.0 : 1.0,
+                  ),
                 ),
-              ),
-              child: Center(
-                child: Text(
-                  String.fromCharCode(widget.index + 65),
-                  style: TextStyle(
-                    fontSize: fontSize,
-                    fontWeight: FontWeight.bold,
-                    color: widget.isSelected ? Colors.blue : Colors.grey,
+                child: Center(
+                  child: Text(
+                    String.fromCharCode(widget.index + 65),
+                    style: TextStyle(
+                      fontSize: fontSize,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Text(
-                  widget.label,
-                  style: TextStyle(
-                    fontSize: fontSize,
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Text(
+                    widget.label,
+                    style: TextStyle(
+                      fontSize: fontSize,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
                   ),
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 2,
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
